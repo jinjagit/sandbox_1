@@ -48,7 +48,6 @@ func vertex_posn(face_normal : Vector3, percent : Vector2, axisA : Vector3, axis
 	return spherize(pointOnUnitCube) if spherized else pointOnUnitCube
 
 func generate_mesh():
-	print("start {x}".format({"x":normal}))
 	var arrays := []
 	arrays.resize(Mesh.ARRAY_MAX)
 
@@ -217,15 +216,14 @@ func generate_mesh():
 	arrays[Mesh.ARRAY_TEX_UV] = uv_array
 	arrays[Mesh.ARRAY_INDEX] = index_array
 
-	# 
+	# print("n vertices {v}".format({"v":vertex_array.size()}))
 	# print("n triangles {t}".format({"t":index_array.size() / 3.0}))
 	# var pc_vertices : float = (margin * 1.0 * (resolution - 1) * 4) / (res_sq + (margin * (resolution - 1) * 4)) * 100
 	# print("percent vertices in margin {pcv}".format({"pcv":pc_vertices}))
 	# var pc_triangles : float = ((margin * 1.0 * (resolution - 1) * 24) / (((resolution - 1) * (resolution -1) * 6) + (margin * (resolution - 1) * 24))) / 3.0 * 100.0
 	# print("percent triangles in margin {pct}".format({"pct":pc_triangles}))
-	print("end {x}".format({"x":normal}))
 
-	call_deferred("_update_mesh", arrays)#
+	call_deferred("_update_mesh", arrays)
 
 func _update_mesh(arrays : Array):
 	var _mesh := ArrayMesh.new()
@@ -235,3 +233,5 @@ func _update_mesh(arrays : Array):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	rotate_object_local(Vector3(0, 1, 0), delta/5)
+	rotate_object_local(Vector3(1, 0, 0), delta/7)
+	rotate_object_local(Vector3(0, 0, 1), delta/11)

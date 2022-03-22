@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Planet.tscn" type="PackedScene" id=1]
+[ext_resource path="res://UbuntuMono-Regular.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 22
+font_data = ExtResource( 2 )
 
 [node name="Main" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00535631, 0 )
@@ -23,3 +33,46 @@ light_specular = 1.433
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.46831, -35.2252, -15.8102 )
 light_energy = 16.0
 omni_range = 44.062
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Control"]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/CanvasLayer"]
+anchor_left = 0.99
+anchor_top = 0.01
+anchor_right = 0.99
+anchor_bottom = 0.01
+margin_left = -297.76
+margin_top = 11.0
+margin_right = -12.76
+margin_bottom = 229.0
+custom_fonts/normal_font = SubResource( 3 )
+meta_underlined = false
+text = "Well, hello there from a Rich Text Label!
+
+Now, let's add a lot more text in one continuous line that wraps around and see what happens to the text layout."
+fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Control/CanvasLayer"]
+anchor_left = 0.934
+anchor_top = 0.883
+anchor_right = 0.934
+anchor_bottom = 0.893
+margin_left = -108.92
+margin_top = -29.8
+margin_right = 61.08
+margin_bottom = 15.2
+custom_fonts/font = SubResource( 1 )
+text = "Click me!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
