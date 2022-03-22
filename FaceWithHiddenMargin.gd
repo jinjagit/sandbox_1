@@ -232,6 +232,6 @@ func _update_mesh(arrays : Array):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	rotate_object_local(Vector3(0, 1, 0), delta/5)
-	rotate_object_local(Vector3(1, 0, 0), delta/7)
-	rotate_object_local(Vector3(0, 0, 1), delta/11)
+	rotate_object_local(Vector3(0, 1, 0), delta/19)
+	rotate_object_local(Vector3(1, 0, 0), delta/23)
+	rotate_object_local(Vector3(0, 0, 1), delta/27)

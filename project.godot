@@ -18,16 +18,10 @@ _global_script_classes=[ {
 "class": "FaceWithMarginOLD",
 "language": "GDScript",
 "path": "res://test.gd"
-}, {
-"base": "MeshInstance",
-"class": "PlanetMeshFace",
-"language": "GDScript",
-"path": "res://PlanetMeshFace.gd"
 } ]
 _global_script_class_icons={
 "FaceWithHiddenMargin": "",
-"FaceWithMarginOLD": "",
-"PlanetMeshFace": ""
+"FaceWithMarginOLD": ""
 }
 
 [application]
