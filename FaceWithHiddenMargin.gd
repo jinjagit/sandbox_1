@@ -229,9 +229,3 @@ func _update_mesh(arrays : Array):
 	var _mesh := ArrayMesh.new()
 	_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	self.mesh = _mesh
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	rotate_object_local(Vector3(0, 1, 0), delta/19)
-	rotate_object_local(Vector3(1, 0, 0), delta/23)
-	rotate_object_local(Vector3(0, 0, 1), delta/27)
