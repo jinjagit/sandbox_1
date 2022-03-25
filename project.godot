@@ -13,15 +13,9 @@ _global_script_classes=[ {
 "class": "FaceWithHiddenMargin",
 "language": "GDScript",
 "path": "res://FaceWithHiddenMargin.gd"
-}, {
-"base": "MeshInstance",
-"class": "FaceWithMarginOLD",
-"language": "GDScript",
-"path": "res://test.gd"
 } ]
 _global_script_class_icons={
-"FaceWithHiddenMargin": "",
-"FaceWithMarginOLD": ""
+"FaceWithHiddenMargin": ""
 }
 
 [application]
