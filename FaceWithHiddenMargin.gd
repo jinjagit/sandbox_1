@@ -214,12 +214,12 @@ func generate_mesh(resolution, margin):
 	arrays[Mesh.ARRAY_TEX_UV] = uv_array
 	arrays[Mesh.ARRAY_INDEX] = index_array
 
-	print("n vertices {v}".format({"v":vertex_array.size()}))
-	print("n triangles {t}".format({"t":index_array.size() / 3.0}))
-	var pc_vertices : float = (margin * 1.0 * (resolution - 1) * 4) / (res_sq + (margin * (resolution - 1) * 4)) * 100
-	print("percent vertices in margin {pcv}".format({"pcv":pc_vertices}))
-	var pc_triangles : float = ((margin * 1.0 * (resolution - 1) * 24) / (((resolution - 1) * (resolution -1) * 6) + (margin * (resolution - 1) * 24))) / 3.0 * 100.0
-	print("percent triangles in margin {pct}".format({"pct":pc_triangles}))
+	# print("n vertices {v}".format({"v":vertex_array.size()}))
+	# print("n triangles {t}".format({"t":index_array.size() / 3.0}))
+	# var pc_vertices : float = (margin * 1.0 * (resolution - 1) * 4) / (res_sq + (margin * (resolution - 1) * 4)) * 100
+	# print("percent vertices in margin {pcv}".format({"pcv":pc_vertices}))
+	# var pc_triangles : float = ((margin * 1.0 * (resolution - 1) * 24) / (((resolution - 1) * (resolution -1) * 6) + (margin * (resolution - 1) * 24))) / 3.0 * 100.0
+	# print("percent triangles in margin {pct}".format({"pct":pc_triangles}))
 
 	call_deferred("_update_mesh", arrays)
 

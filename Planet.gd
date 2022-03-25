@@ -3,7 +3,7 @@ extends Spatial
 onready var StatsText = get_node("../Control/CanvasLayer/RichTextLabel")
 onready var Btn = get_node("../Control/CanvasLayer/Button")
 
-var resolution := 64
+var resolution := 256
 var margin := 3
 var num_vertices : int = ((resolution * resolution) + (margin * (resolution - 1) * 4)) * 6
 
@@ -28,7 +28,7 @@ func _ready():
 func _process(delta):
 	rotate_object_local(Vector3(0, 1, 0), delta/19)
 	rotate_object_local(Vector3(1, 0, 0), delta/23)
-	rotate_object_local(Vector3(0, 0, 1), delta/27)
+	#rotate_object_local(Vector3(0, 0, 1), delta/27)
 	
 func _physics_process(_delta):
 	var indices : float = Performance.get_monitor(Performance.RENDER_VERTICES_IN_FRAME)
@@ -44,7 +44,6 @@ func _physics_process(_delta):
 		+ "Mesh vertices:  " + str(num_vertices)
 		)
 		
-	
 func _on_Button_pressed():
 	set_process(not is_processing())
 	

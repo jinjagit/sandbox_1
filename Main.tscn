@@ -44,7 +44,6 @@ __meta__ = {
 [node name="CanvasLayer" type="CanvasLayer" parent="Control"]
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Control/CanvasLayer"]
-visible = false
 anchor_left = 0.99
 anchor_top = 0.01
 anchor_right = 0.99
@@ -62,7 +61,6 @@ __meta__ = {
 }
 
 [node name="Button" type="Button" parent="Control/CanvasLayer"]
-visible = false
 anchor_left = 0.934
 anchor_top = 0.883
 anchor_right = 0.934
