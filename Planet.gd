@@ -3,7 +3,7 @@ extends Spatial
 onready var StatsText = get_node("../Control/CanvasLayer/RichTextLabel")
 onready var Btn = get_node("../Control/CanvasLayer/Button")
 
-var resolution := 256
+var resolution := 64
 var margin := 3
 var num_vertices : int = ((resolution * resolution) + (margin * (resolution - 1) * 4)) * 6
 
