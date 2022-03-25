@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Kari-Bienert-Decisions-Oil.jpg-878d1d572765a9bf858555a14d7807f0.s3tc.stex"
-path.etc2="res://.import/Kari-Bienert-Decisions-Oil.jpg-878d1d572765a9bf858555a14d7807f0.etc2.stex"
+path.s3tc="res://.import/Sierpinski_square.jpg-632eceaf3d88c2ef22046b5b1fffa430.s3tc.stex"
+path.etc2="res://.import/Sierpinski_square.jpg-632eceaf3d88c2ef22046b5b1fffa430.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Kari-Bienert-Decisions-Oil.jpg"
-dest_files=[ "res://.import/Kari-Bienert-Decisions-Oil.jpg-878d1d572765a9bf858555a14d7807f0.s3tc.stex", "res://.import/Kari-Bienert-Decisions-Oil.jpg-878d1d572765a9bf858555a14d7807f0.etc2.stex" ]
+source_file="res://assets/images/Sierpinski_square.jpg"
+dest_files=[ "res://.import/Sierpinski_square.jpg-632eceaf3d88c2ef22046b5b1fffa430.s3tc.stex", "res://.import/Sierpinski_square.jpg-632eceaf3d88c2ef22046b5b1fffa430.etc2.stex" ]
 
 [params]
 

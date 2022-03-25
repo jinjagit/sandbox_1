@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/ purpleX.png-1431bd641367b8f648b0f4e35ec3e843.s3tc.stex"
-path.etc2="res://.import/ purpleX.png-1431bd641367b8f648b0f4e35ec3e843.etc2.stex"
+path.s3tc="res://.import/purple_pink.png-5461dee9f944e8d54f9c6438d5eae86b.s3tc.stex"
+path.etc2="res://.import/purple_pink.png-5461dee9f944e8d54f9c6438d5eae86b.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res:// purpleX.png"
-dest_files=[ "res://.import/ purpleX.png-1431bd641367b8f648b0f4e35ec3e843.s3tc.stex", "res://.import/ purpleX.png-1431bd641367b8f648b0f4e35ec3e843.etc2.stex" ]
+source_file="res://assets/images/purple_pink.png"
+dest_files=[ "res://.import/purple_pink.png-5461dee9f944e8d54f9c6438d5eae86b.s3tc.stex", "res://.import/purple_pink.png-5461dee9f944e8d54f9c6438d5eae86b.etc2.stex" ]
 
 [params]
 

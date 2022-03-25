@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Sierpinski_square.jpg-763aaf754aea66a8b96f1ca83603dde7.s3tc.stex"
-path.etc2="res://.import/Sierpinski_square.jpg-763aaf754aea66a8b96f1ca83603dde7.etc2.stex"
+path.s3tc="res://.import/ purpleX.png-dad258175e8f560f1dd7ffcf308312cc.s3tc.stex"
+path.etc2="res://.import/ purpleX.png-dad258175e8f560f1dd7ffcf308312cc.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Sierpinski_square.jpg"
-dest_files=[ "res://.import/Sierpinski_square.jpg-763aaf754aea66a8b96f1ca83603dde7.s3tc.stex", "res://.import/Sierpinski_square.jpg-763aaf754aea66a8b96f1ca83603dde7.etc2.stex" ]
+source_file="res://assets/images/ purpleX.png"
+dest_files=[ "res://.import/ purpleX.png-dad258175e8f560f1dd7ffcf308312cc.s3tc.stex", "res://.import/ purpleX.png-dad258175e8f560f1dd7ffcf308312cc.etc2.stex" ]
 
 [params]
 

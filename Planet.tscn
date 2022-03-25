@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Planet.gd" type="Script" id=1]
-[ext_resource path="res:// purple_pink.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/purple_pink.png" type="Texture" id=2]
 [ext_resource path="res://FaceWithHiddenMargin.gd" type="Script" id=3]
 
 [sub_resource type="SpatialMaterial" id=2]
