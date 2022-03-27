@@ -3,7 +3,7 @@ extends Spatial
 onready var StatsText = get_node("../Control/CanvasLayer/RichTextLabel")
 onready var Btn = get_node("../Control/CanvasLayer/Button")
 
-var resolution := 32
+var resolution := 256
 var margin := 3
 var num_vertices : int = ((resolution * resolution) + (margin * (resolution - 1) * 4)) * 6
 var bench : String = ''
@@ -22,14 +22,14 @@ func _input(event):
 		Btn.visible = not Btn.visible
 		
 func _ready():
+	var startTime = OS.get_ticks_msec()
+
 	for child in get_children():
-		var startTime = OS.get_ticks_usec()
-		
 		var face := child as FaceWithHiddenMargin
 		face.generate_mesh(resolution, margin)
 		
-		var endTime = OS.get_ticks_usec()
-		bench_time = (endTime - startTime) * 10e-6
+	var endTime = OS.get_ticks_msec()
+	bench_time = (endTime - startTime) / 1000.0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -41,7 +41,7 @@ func _physics_process(_delta):
 	var indices : float = Performance.get_monitor(Performance.RENDER_VERTICES_IN_FRAME)
 	
 	if bench_time > 0.0:
-		bench = "time to render = %.6f" % bench_time
+		bench = "time to render = %.3f" % bench_time
 	
 	StatsText.text = (
 		"FPS: " + str(Performance.get_monitor(Performance.TIME_FPS)) + "\n\n"
