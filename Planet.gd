@@ -3,9 +3,11 @@ extends Spatial
 onready var StatsText = get_node("../Control/CanvasLayer/RichTextLabel")
 onready var Btn = get_node("../Control/CanvasLayer/Button")
 
-var resolution := 64
+var resolution := 32
 var margin := 3
 var num_vertices : int = ((resolution * resolution) + (margin * (resolution - 1) * 4)) * 6
+var bench : String = ''
+var bench_time : float = 0.0
 
 func _init():
 	VisualServer.set_debug_generate_wireframes(true)
@@ -21,8 +23,13 @@ func _input(event):
 		
 func _ready():
 	for child in get_children():
+		var startTime = OS.get_ticks_usec()
+		
 		var face := child as FaceWithHiddenMargin
 		face.generate_mesh(resolution, margin)
+		
+		var endTime = OS.get_ticks_usec()
+		bench_time = (endTime - startTime) * 10e-6
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -33,15 +40,20 @@ func _process(delta):
 func _physics_process(_delta):
 	var indices : float = Performance.get_monitor(Performance.RENDER_VERTICES_IN_FRAME)
 	
+	if bench_time > 0.0:
+		bench = "time to render = %.6f" % bench_time
+	
 	StatsText.text = (
 		"FPS: " + str(Performance.get_monitor(Performance.TIME_FPS)) + "\n\n"
 		+ "Memory static:  " + str(round(Performance.get_monitor(Performance.MEMORY_STATIC)/1024/1024)) + " MB\n"
 		+ "Memory dynamic: " + str(round(Performance.get_monitor(Performance.MEMORY_DYNAMIC)/1024/1024)) + " MB\n"
 		+ "Vertex memory:  " + str(round(Performance.get_monitor(Performance.RENDER_VERTEX_MEM_USED)/1024/1024)) + " MB\n"
-		+ "Texture memory: " + str(round(Performance.get_monitor(Performance.RENDER_TEXTURE_MEM_USED)/1024/1024)) + " MB\n"
+		+ "Texture memory: " + str(round(Performance.get_monitor(Performance.RENDER_TEXTURE_MEM_USED)/1024/1024)) + " MB\n\n"
+		+ "Resolution:     " + str(resolution) + "\n"
 		+ "Indices:        " + str(indices) + "\n"
 		+ "Triangles:      " + str(indices / 6)  + "\n"
-		+ "Mesh vertices:  " + str(num_vertices)
+		+ "Mesh vertices:  " + str(num_vertices) + "\n\n"
+		+ bench
 		)
 		
 func _on_Button_pressed():
