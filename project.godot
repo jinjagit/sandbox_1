@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "FaceWithHiddenMargin",
 "language": "GDScript",
 "path": "res://FaceWithHiddenMargin.gd"
+}, {
+"base": "Reference",
+"class": "Test",
+"language": "GDScript",
+"path": "res://Test.gd"
 } ]
 _global_script_class_icons={
-"FaceWithHiddenMargin": ""
+"FaceWithHiddenMargin": "",
+"Test": ""
 }
 
 [application]
