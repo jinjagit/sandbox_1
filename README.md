@@ -8,7 +8,7 @@ Q: Do meshes, etc. get drawn in parallel?
   
 A: Apparently not, at least not the 6 `generate_mesh` instances that run here. Not a problem, necessarily, but good to know.  
   
-My best guess at this point is that it could be better to run the calculations needed to create the final mesh arrays, triangle arrays, textures, etc. in parallel, using Rust (especially when high n of array elements, as with, say, the pixels on a high-res texture), and then render them in series (possibly avoids some engine wierdness if trying to render 2 or more at once, and probably not a significant performance issue, whereas the calculations will be).  
+My best guess at this point is that it could be better to run the calculations needed to create the final mesh arrays, triangle arrays, textures, etc. in parallel, using Rust (especially when high n of array elements, as with, say, the pixels on a high-res texture), and then render them in series (possibly avoids some engine weirdness if trying to render 2 or more at once, and probably not a significant performance issue, whereas the calculations will be).  
   
 - [x] How to get (toggle-able) stats output (n verts, fps, etc) -> use for benchmarking
 
@@ -25,5 +25,31 @@ resolution   seconds calculating vs reading   factor
 
 - [x] How to get & handle input from UI (basics understood and tested)
 - [x] Organize files in folders
+- [ ] How to write to file
 - [ ] How to destroy/recreate meshes
 - [ ] How to integrate / use Rust
+
+
+### Notes:
+
+Currently using these normals for each face:
+
+Name   (x, y, z)
+
+Up     (0, 1, 0)
+Down   (0, -1, 0)
+Left   (-1, 0, 0)
+Right  (1, 0, 0)
+Back   (0, 0, -1)
+Front  (0, 0, 1)
+
+
+How to name face mesh data files:
+
+face_32_up
+
+Each file returns:
+All necessary mesh arrays
+num_vertices
+
+Return as dictionary: `my_dict = {"First Array": [1, 2, 3, 4]}`
