@@ -12,6 +12,13 @@ var bench_time : float = 0.0
 func _init():
 	VisualServer.set_debug_generate_wireframes(true)
 
+func save(content):
+	# This saves to res:// but is not visible in editor file browser until extension changed.
+	var file = File.new()
+	file.open("res://test_save.txt", File.WRITE)
+	file.store_string(content)
+	file.close()
+
 func _input(event):
 	if event is InputEventKey and Input.is_key_pressed(KEY_P):
 		var vp = get_viewport()
@@ -22,6 +29,8 @@ func _input(event):
 		Btn.visible = not Btn.visible
 		
 func _ready():
+	save("I am test content.\nSave me!")
+	
 	var startTime = OS.get_ticks_msec()
 
 	for child in get_children():
