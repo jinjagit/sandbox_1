@@ -6,9 +6,10 @@ onready var MenuRes = get_node("../Control/CanvasLayer/VBoxContainer/MenuButton"
 
 var resolution := 32
 var margin := 3
-var num_vertices : int = ((resolution * resolution) + (margin * (resolution - 1) * 4)) * 6
+#var num_vertices : int = ((resolution * resolution) + (margin * (resolution - 1) * 4)) * 6
 var bench : String = ''
 var bench_time : float = 0.0
+var update_stats_text = false
 
 var popup
 
@@ -32,7 +33,7 @@ func generate_sphere():
 	var endTime = OS.get_ticks_msec()
 	bench_time = (endTime - startTime) / 1000.0
 
-	update_stats_text()
+	update_stats_text = true
 
 func _input(event):
 	if event is InputEventKey and Input.is_key_pressed(KEY_P):
@@ -62,12 +63,14 @@ func _process(delta):
 	rotate_object_local(Vector3(1, 0, 0), delta/23)
 	#rotate_object_local(Vector3(0, 0, 1), delta/27)
 	
-# Not using to update FPS every physics frame, to optimize benchmarks
-# func _physics_process(_delta):
+func _physics_process(_delta):
+	if update_stats_text == true:
+		update_stats_text()
+		update_stats_text == false
 
 func update_stats_text():
 	bench = "time to render = %.3f" % bench_time
-	num_vertices = ((resolution * resolution) + (margin * (resolution - 1) * 4)) * 6
+	var num_vertices = ((resolution * resolution) + (margin * (resolution - 1) * 4)) * 6
 	var indices : float = Performance.get_monitor(Performance.RENDER_VERTICES_IN_FRAME)
 
 	StatsText.text = (
@@ -77,8 +80,8 @@ func update_stats_text():
 		+ "Vertex memory:  " + str(round(Performance.get_monitor(Performance.RENDER_VERTEX_MEM_USED)/1024/1024)) + " MB\n"
 		+ "Texture memory: " + str(round(Performance.get_monitor(Performance.RENDER_TEXTURE_MEM_USED)/1024/1024)) + " MB\n\n"
 		+ "Resolution:     " + str(resolution) + "\n"
-		+ "Indices:        " + str(indices) + "\n"
-		+ "Triangles:      " + str(indices / 6)  + "\n"
+		+ "Indices:        " + str(Performance.get_monitor(Performance.RENDER_VERTICES_IN_FRAME)) + "\n"
+		+ "Triangles:      " + str(Performance.get_monitor(Performance.RENDER_VERTICES_IN_FRAME) / 6)  + "\n"
 		+ "Mesh vertices:  " + str(num_vertices) + "\n\n"
 		+ bench
 	)
@@ -90,9 +93,6 @@ func _on_Button_pressed():
 		StatsText.text = str('Rotation set to ON')
 	else:
 		StatsText.text = str('Rotation set to OFF')
-
-func menu_resolution_select():
-	print("hello from Planet.gd")
 
 func _on_item_pressed(ID):
 	resolution = int(popup.get_item_text(ID))
