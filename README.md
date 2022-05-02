@@ -25,14 +25,14 @@ resolution   seconds calculating vs reading   factor
 
 - [x] How to get & handle input from UI (basics understood and tested)
 - [x] Organize files in folders
-- [ ] How to write to file
+- [x] How to write to file
 - [ ] How to destroy/recreate meshes
 - [ ] How to integrate / use Rust
 
 
 ### Notes:
 
-Currently using these normals for each face:
+Currently using these normals for each cube face:
 
 Name   (x, y, z)
 
@@ -44,7 +44,7 @@ Back   (0, 0, -1)
 Front  (0, 0, 1)
 
 
-How to name face mesh data files:
+How to name face mesh data files / functions:
 
 face_32_up
 

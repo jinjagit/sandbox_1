@@ -2,12 +2,15 @@ extends Spatial
 
 onready var StatsText = get_node("../Control/CanvasLayer/RichTextLabel")
 onready var Btn = get_node("../Control/CanvasLayer/Button")
+onready var MenuRes = get_node("../Control/CanvasLayer/VBoxContainer/MenuButton")
 
 var resolution := 32
 var margin := 3
 var num_vertices : int = ((resolution * resolution) + (margin * (resolution - 1) * 4)) * 6
 var bench : String = ''
 var bench_time : float = 0.0
+
+var popup
 
 func _init():
 	VisualServer.set_debug_generate_wireframes(true)
@@ -39,6 +42,14 @@ func _ready():
 		
 	var endTime = OS.get_ticks_msec()
 	bench_time = (endTime - startTime) / 1000.0
+
+	popup = MenuRes.get_popup()
+	popup.add_item("32")
+	popup.add_item("64")
+	popup.add_item("128")
+	popup.add_item("256")
+
+	popup.connect("id_pressed", self, "_on_item_pressed")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -72,3 +83,9 @@ func _on_Button_pressed():
 		StatsText.text = str('Rotation set to ON')
 	else:
 		StatsText.text = str('Rotation set to OFF')
+
+func menu_resolution_select():
+	print("hello from Planet.gd")
+
+func _on_item_pressed(ID):
+	print(popup.get_item_text(ID), " pressed (via Planet class)")
