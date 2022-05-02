@@ -14,19 +14,19 @@ My best guess at this point is that it could be better to run the calculations n
 
 The `RENDER_VERTICES_IN_FRAME` stat seems to give the total number of indices used for triangles, and for both sides of triangles (? even if single-sided material used), not the number of vertices I use to create the underlying mesh. Not a problem, since I can calculate the number of vertices anyway.
 
-Benchmarks to render all 6 face meshes of sphere:
+Benchmarks (MacBook Pro) to Re-render all 6 face meshes of sphere:
 ```
 resolution   seconds calculating vs reading   factor
- 32            0.066
- 64            0.300
-128            2.777
-256           35.903
+ 32            0.077
+ 64            0.301
+128            2.51
+256           29.85
 ```
 
 - [x] How to get & handle input from UI (basics understood and tested)
 - [x] Organize files in folders
 - [x] How to write to file
-- [ ] How to destroy/recreate meshes
+- [x] How to destroy/recreate meshes
 - [ ] How to integrate / use Rust
 
 
