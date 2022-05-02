@@ -9,6 +9,7 @@ var margin := 3
 var num_vertices : int = ((resolution * resolution) + (margin * (resolution - 1) * 4)) * 6
 var bench : String = ''
 var bench_time : float = 0.0
+var update_stats = false
 
 var popup
 
@@ -22,6 +23,18 @@ func save(content):
 	file.store_string(content)
 	file.close()
 
+func generate_sphere():
+	var startTime = OS.get_ticks_msec()
+
+	for child in get_children():
+		var face := child as FaceWithHiddenMargin
+		face.generate_mesh(resolution, margin)
+		
+	var endTime = OS.get_ticks_msec()
+	bench_time = (endTime - startTime) / 1000.0
+
+	update_stats = true
+
 func _input(event):
 	if event is InputEventKey and Input.is_key_pressed(KEY_P):
 		var vp = get_viewport()
@@ -34,14 +47,7 @@ func _input(event):
 func _ready():
 	save("I am test content.\nSave me!")
 	
-	var startTime = OS.get_ticks_msec()
-
-	for child in get_children():
-		var face := child as FaceWithHiddenMargin
-		face.generate_mesh(resolution, margin)
-		
-	var endTime = OS.get_ticks_msec()
-	bench_time = (endTime - startTime) / 1000.0
+	generate_sphere()
 
 	popup = MenuRes.get_popup()
 	popup.add_item("32")
@@ -57,24 +63,26 @@ func _process(delta):
 	rotate_object_local(Vector3(1, 0, 0), delta/23)
 	#rotate_object_local(Vector3(0, 0, 1), delta/27)
 	
-func _physics_process(_delta):
-	var indices : float = Performance.get_monitor(Performance.RENDER_VERTICES_IN_FRAME)
-	
-	if bench_time > 0.0:
+func _physics_process(_delta):	
+	if update_stats == true:
 		bench = "time to render = %.3f" % bench_time
+		num_vertices = ((resolution * resolution) + (margin * (resolution - 1) * 4)) * 6
+		var indices : float = Performance.get_monitor(Performance.RENDER_VERTICES_IN_FRAME)
 	
-	StatsText.text = (
-		"FPS: " + str(Performance.get_monitor(Performance.TIME_FPS)) + "\n\n"
-		+ "Memory static:  " + str(round(Performance.get_monitor(Performance.MEMORY_STATIC)/1024/1024)) + " MB\n"
-		+ "Memory dynamic: " + str(round(Performance.get_monitor(Performance.MEMORY_DYNAMIC)/1024/1024)) + " MB\n"
-		+ "Vertex memory:  " + str(round(Performance.get_monitor(Performance.RENDER_VERTEX_MEM_USED)/1024/1024)) + " MB\n"
-		+ "Texture memory: " + str(round(Performance.get_monitor(Performance.RENDER_TEXTURE_MEM_USED)/1024/1024)) + " MB\n\n"
-		+ "Resolution:     " + str(resolution) + "\n"
-		+ "Indices:        " + str(indices) + "\n"
-		+ "Triangles:      " + str(indices / 6)  + "\n"
-		+ "Mesh vertices:  " + str(num_vertices) + "\n\n"
-		+ bench
-		)
+		StatsText.text = (
+			"FPS: " + str(Performance.get_monitor(Performance.TIME_FPS)) + "\n\n"
+			+ "Memory static:  " + str(round(Performance.get_monitor(Performance.MEMORY_STATIC)/1024/1024)) + " MB\n"
+			+ "Memory dynamic: " + str(round(Performance.get_monitor(Performance.MEMORY_DYNAMIC)/1024/1024)) + " MB\n"
+			+ "Vertex memory:  " + str(round(Performance.get_monitor(Performance.RENDER_VERTEX_MEM_USED)/1024/1024)) + " MB\n"
+			+ "Texture memory: " + str(round(Performance.get_monitor(Performance.RENDER_TEXTURE_MEM_USED)/1024/1024)) + " MB\n\n"
+			+ "Resolution:     " + str(resolution) + "\n"
+			+ "Indices:        " + str(indices) + "\n"
+			+ "Triangles:      " + str(indices / 6)  + "\n"
+			+ "Mesh vertices:  " + str(num_vertices) + "\n\n"
+			+ bench
+			)
+
+		update_stats = false
 		
 func _on_Button_pressed():
 	set_process(not is_processing())
@@ -91,6 +99,4 @@ func _on_item_pressed(ID):
 	resolution = int(popup.get_item_text(ID))
 	print(resolution, " pressed (via Planet class)")
 
-	for child in get_children():
-		var face := child as FaceWithHiddenMargin
-		face.generate_mesh(resolution, margin)
+	generate_sphere()
