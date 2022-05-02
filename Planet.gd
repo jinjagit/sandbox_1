@@ -88,4 +88,9 @@ func menu_resolution_select():
 	print("hello from Planet.gd")
 
 func _on_item_pressed(ID):
-	print(popup.get_item_text(ID), " pressed (via Planet class)")
+	resolution = int(popup.get_item_text(ID))
+	print(resolution, " pressed (via Planet class)")
+
+	for child in get_children():
+		var face := child as FaceWithHiddenMargin
+		face.generate_mesh(resolution, margin)
