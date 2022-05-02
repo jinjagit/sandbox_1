@@ -27,6 +27,7 @@ resolution   seconds calculating vs reading   factor
 - [x] Organize files in folders
 - [x] How to write to file
 - [x] How to destroy/recreate meshes
+- [ ] How to read data from files and use to generate meshes
 - [ ] How to integrate / use Rust
 
 
