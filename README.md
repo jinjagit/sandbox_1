@@ -7,7 +7,25 @@ Use this sandbox to discover / understand some basic techniques / concepts:
 Q: Do meshes, etc. get drawn in parallel?  
   
 A: Apparently not, at least not the 6 `generate_mesh` instances that run here. Not a problem, necessarily, but good to know.  
-  
+
+Indeed, printing start end times for each iteration of loop proves this is sequential (expected, since using a loop!):
+``` 
+...
+64 pressed (via Planet class)
+start: 50915
+end: 50974
+start: 50974
+end: 51022
+start: 51022
+end: 51067
+start: 51067
+end: 51112
+start: 51112
+end: 51157
+start: 51157
+end: 51201
+```
+
 My best guess at this point is that it could be better to run the calculations needed to create the final mesh arrays, triangle arrays, textures, etc. in parallel, using Rust (especially when high n of array elements, as with, say, the pixels on a high-res texture), and then render them in series (possibly avoids some engine weirdness if trying to render 2 or more at once, and probably not a significant performance issue, whereas the calculations will be).  
   
 - [x] How to get (toggle-able) stats output (n verts, fps, etc) -> use for benchmarking

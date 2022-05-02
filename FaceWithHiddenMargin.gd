@@ -53,7 +53,7 @@ func generate_mesh(resolution, margin):
 	# var startTime = OS.get_ticks_msec()
 
 	# Simple test of using preloaded class
-	print(Test.hello())
+	# print(Test.hello())
 	
 	var arrays := []
 	arrays.resize(Mesh.ARRAY_MAX)
