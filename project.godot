@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "Test",
 "language": "GDScript",
 "path": "res://Test.gd"
+}, {
+"base": "Reference",
+"class": "TestData",
+"language": "GDScript",
+"path": "res://TestData.gd"
 } ]
 _global_script_class_icons={
 "FaceWithHiddenMargin": "",
-"Test": ""
+"Test": "",
+"TestData": ""
 }
 
 [application]

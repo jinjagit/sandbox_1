@@ -3,6 +3,7 @@ extends Spatial
 onready var StatsText = get_node("../Control/CanvasLayer/RichTextLabel")
 onready var Btn = get_node("../Control/CanvasLayer/Button")
 onready var MenuRes = get_node("../Control/CanvasLayer/VBoxContainer/MenuButton")
+onready var TestData = load("res://TestData.gd").new()
 
 var resolution := 32
 var margin := 3
@@ -48,7 +49,12 @@ func _input(event):
 		Btn.visible = not Btn.visible
 		
 func _ready():
-	save("I am test content.\nSave me!")
+	var test_ary = [6, 4]
+	save(
+		"class_name TestData\n\n"
+		+ "func some_data():\n"
+		+ "    return " + str(test_ary)
+		)
 	
 	generate_sphere()
 
@@ -59,6 +65,8 @@ func _ready():
 	popup.add_item("256")
 
 	popup.connect("id_pressed", self, "_on_item_pressed")
+
+	print("Data read from TestData.some_data() {v}".format({"v":str(TestData.some_data())}))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
