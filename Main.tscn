@@ -53,9 +53,6 @@ custom_fonts/normal_font = SubResource( 3 )
 meta_underlined = false
 text = "Welcome to Sandbox_1!"
 fit_content_height = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Button" type="Button" parent="Control/CanvasLayer"]
 anchor_left = 0.934
@@ -78,4 +75,11 @@ margin_right = 181.0
 margin_bottom = 20.0
 text = "Resolution"
 
+[node name="ButtonMode" type="Button" parent="Control/CanvasLayer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 181.0
+margin_bottom = 44.0
+text = "Mode"
+
 [connection signal="pressed" from="Control/CanvasLayer/Button" to="Planet" method="_on_Button_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/VBoxContainer/ButtonMode" to="Planet" method="_on_ButtonMode_pressed"]

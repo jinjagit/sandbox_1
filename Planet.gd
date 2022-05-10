@@ -3,16 +3,18 @@ extends Spatial
 onready var StatsText = get_node("../Control/CanvasLayer/RichTextLabel")
 onready var Btn = get_node("../Control/CanvasLayer/Button")
 onready var MenuRes = get_node("../Control/CanvasLayer/VBoxContainer/MenuButton")
-onready var TestData = load("res://TestData.gd").new()
+onready var BtnMode = get_node("../Control/CanvasLayer/VBoxContainer/ButtonMode")
+onready var TestData = preload("res://TestData.gd").new()
+onready var test_data = TestData.some_data()
 
 var resolution := 32
 var margin := 3
-#var num_vertices : int = ((resolution * resolution) + (margin * (resolution - 1) * 4)) * 6
 var bench : String = ''
 var bench_time : float = 0.0
 var update_stats = false
 var update_stats_time = 0
 var update_stats_delay = 1000
+var mode: String = 'calculate'
 
 var popup
 
@@ -26,6 +28,10 @@ func save(content):
 	file.store_string(content)
 	file.close()
 
+func update_stats_display():
+	update_stats_time = OS.get_ticks_msec()
+	update_stats = true
+
 func generate_sphere():
 	var startTime = OS.get_ticks_msec()
 
@@ -36,8 +42,7 @@ func generate_sphere():
 	var endTime = OS.get_ticks_msec()
 	bench_time = (endTime - startTime) / 1000.0
 
-	update_stats_time = OS.get_ticks_msec()
-	update_stats = true
+	update_stats_display()
 
 func _input(event):
 	if event is InputEventKey and Input.is_key_pressed(KEY_P):
@@ -49,11 +54,11 @@ func _input(event):
 		Btn.visible = not Btn.visible
 		
 func _ready():
-	var test_ary = [6, 4]
+	var test_dict = {"one": [6, 4], "two": [1, 2]}
 	save(
 		"class_name TestData\n\n"
 		+ "func some_data():\n"
-		+ "    return " + str(test_ary)
+		+ "    return " + str(test_dict)
 		)
 	
 	generate_sphere()
@@ -66,7 +71,7 @@ func _ready():
 
 	popup.connect("id_pressed", self, "_on_item_pressed")
 
-	print("Data read from TestData.some_data() {v}".format({"v":str(TestData.some_data())}))
+	# print("Data read from TestData.some_data() {v}".format({"v":str(TestData.some_data()["two"])}))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -90,7 +95,8 @@ func update_stats_text():
 	var indices : float = Performance.get_monitor(Performance.RENDER_VERTICES_IN_FRAME)
 
 	StatsText.text = (
-		"FPS: " + str(Performance.get_monitor(Performance.TIME_FPS)) + "\n\n"
+		"Mode: " + mode + "\n\n"
+		+ "FPS: " + str(Performance.get_monitor(Performance.TIME_FPS)) + "\n\n"
 		+ "Memory static:  " + str(round(Performance.get_monitor(Performance.MEMORY_STATIC)/1024/1024)) + " MB\n"
 		+ "Memory dynamic: " + str(round(Performance.get_monitor(Performance.MEMORY_DYNAMIC)/1024/1024)) + " MB\n"
 		+ "Vertex memory:  " + str(round(Performance.get_monitor(Performance.RENDER_VERTEX_MEM_USED)/1024/1024)) + " MB\n"
@@ -115,3 +121,12 @@ func _on_item_pressed(ID):
 	print(resolution, " pressed (via Planet class)")
 
 	generate_sphere()
+
+
+func _on_ButtonMode_pressed():
+	if mode == 'calculate':
+		mode = 'read'
+	else:
+		mode = 'calculate'
+	
+	update_stats_display()

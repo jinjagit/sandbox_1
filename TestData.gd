@@ -1,4 +1,4 @@
 class_name TestData
 
 func some_data():
-	return [6, 4]
+	return {"one": [6, 4], "two": [1, 2]}
