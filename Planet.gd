@@ -52,6 +52,8 @@ func _input(event):
 	if event is InputEventKey and Input.is_key_pressed(KEY_U):
 		StatsText.visible = not StatsText.visible
 		Btn.visible = not Btn.visible
+		BtnMode.visible = not BtnMode.visible
+		MenuRes.visible = not MenuRes.visible
 		
 func _ready():
 	var test_dict = {"one": [6, 4], "two": [1, 2]}
