@@ -1,7 +1,7 @@
 extends Spatial
 
 onready var StatsText = get_node("../Control/CanvasLayer/RichTextLabel")
-onready var Btn = get_node("../Control/CanvasLayer/Button")
+onready var Btn = get_node("../Control/CanvasLayer/VBoxContainer/Button")
 onready var MenuRes = get_node("../Control/CanvasLayer/VBoxContainer/MenuButton")
 onready var BtnMode = get_node("../Control/CanvasLayer/VBoxContainer/ButtonMode")
 onready var TestData = preload("res://TestData.gd").new()
@@ -71,6 +71,8 @@ func _ready():
 	popup.add_item("128")
 	popup.add_item("256")
 
+	# popup.font.size = 50
+
 	popup.connect("id_pressed", self, "_on_item_pressed")
 
 	# print("Data read from TestData.some_data() {v}".format({"v":str(TestData.some_data()["two"])}))
@@ -112,11 +114,6 @@ func update_stats_text():
 		
 func _on_Button_pressed():
 	set_process(not is_processing())
-	
-	if is_processing():
-		StatsText.text = str('Rotation set to ON')
-	else:
-		StatsText.text = str('Rotation set to OFF')
 
 func _on_item_pressed(ID):
 	resolution = int(popup.get_item_text(ID))

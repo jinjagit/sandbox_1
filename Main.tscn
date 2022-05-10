@@ -1,11 +1,20 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Planet.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/fonts/UbuntuMono-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Main.tres" type="Theme" id=3]
 
 [sub_resource type="DynamicFont" id=3]
 size = 20
 use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 22
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 22
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=1]
@@ -37,6 +46,7 @@ omni_range = 44.062
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 3 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Control"]
 
@@ -54,18 +64,6 @@ meta_underlined = false
 text = "Welcome to Sandbox_1!"
 fit_content_height = true
 
-[node name="Button" type="Button" parent="Control/CanvasLayer"]
-anchor_left = 0.934
-anchor_top = 0.883
-anchor_right = 0.934
-anchor_bottom = 0.893
-margin_left = -108.92
-margin_top = -29.8
-margin_right = 61.08
-margin_bottom = 15.2
-custom_fonts/font = SubResource( 1 )
-text = "Rotation"
-
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/CanvasLayer"]
 margin_left = 23.0
 margin_top = 18.0
@@ -74,14 +72,24 @@ margin_bottom = 616.0
 
 [node name="MenuButton" type="MenuButton" parent="Control/CanvasLayer/VBoxContainer"]
 margin_right = 181.0
-margin_bottom = 20.0
+margin_bottom = 29.0
+theme = ExtResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Resolution"
 
 [node name="ButtonMode" type="Button" parent="Control/CanvasLayer/VBoxContainer"]
-margin_top = 24.0
+margin_top = 33.0
 margin_right = 181.0
-margin_bottom = 44.0
+margin_bottom = 62.0
+custom_fonts/font = SubResource( 5 )
 text = "Mode"
 
-[connection signal="pressed" from="Control/CanvasLayer/Button" to="Planet" method="_on_Button_pressed"]
+[node name="Button" type="Button" parent="Control/CanvasLayer/VBoxContainer"]
+margin_top = 66.0
+margin_right = 181.0
+margin_bottom = 95.0
+custom_fonts/font = SubResource( 1 )
+text = "Rotation"
+
 [connection signal="pressed" from="Control/CanvasLayer/VBoxContainer/ButtonMode" to="Planet" method="_on_ButtonMode_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/VBoxContainer/Button" to="Planet" method="_on_Button_pressed"]
