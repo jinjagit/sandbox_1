@@ -9,7 +9,9 @@ var margin := 3
 #var num_vertices : int = ((resolution * resolution) + (margin * (resolution - 1) * 4)) * 6
 var bench : String = ''
 var bench_time : float = 0.0
-var update_stats_text = false
+var update_stats = false
+var update_stats_time = 0
+var update_stats_delay = 1000
 
 var popup
 
@@ -33,7 +35,8 @@ func generate_sphere():
 	var endTime = OS.get_ticks_msec()
 	bench_time = (endTime - startTime) / 1000.0
 
-	update_stats_text = true
+	update_stats_time = OS.get_ticks_msec()
+	update_stats = true
 
 func _input(event):
 	if event is InputEventKey and Input.is_key_pressed(KEY_P):
@@ -64,9 +67,14 @@ func _process(delta):
 	#rotate_object_local(Vector3(0, 0, 1), delta/27)
 	
 func _physics_process(_delta):
-	if update_stats_text == true:
+	if update_stats == true && update_stats_time > 1 && OS.get_ticks_msec() > update_stats_time + update_stats_delay:
+		print("update_stats_time: {v}".format({"v":update_stats_time}))
+		print("OS.get_ticks_msec(): {v}".format({"v":OS.get_ticks_msec()}))
 		update_stats_text()
-		update_stats_text == false
+		update_stats = false
+
+		if update_stats_delay == 1000:
+			update_stats_delay = 100
 
 func update_stats_text():
 	bench = "time to render = %.3f" % bench_time
@@ -80,8 +88,8 @@ func update_stats_text():
 		+ "Vertex memory:  " + str(round(Performance.get_monitor(Performance.RENDER_VERTEX_MEM_USED)/1024/1024)) + " MB\n"
 		+ "Texture memory: " + str(round(Performance.get_monitor(Performance.RENDER_TEXTURE_MEM_USED)/1024/1024)) + " MB\n\n"
 		+ "Resolution:     " + str(resolution) + "\n"
-		+ "Indices:        " + str(Performance.get_monitor(Performance.RENDER_VERTICES_IN_FRAME)) + "\n"
-		+ "Triangles:      " + str(Performance.get_monitor(Performance.RENDER_VERTICES_IN_FRAME) / 6)  + "\n"
+		+ "Indices:        " + str(indices) + "\n"
+		+ "Triangles:      " + str(indices / 6)  + "\n"
 		+ "Mesh vertices:  " + str(num_vertices) + "\n\n"
 		+ bench
 	)

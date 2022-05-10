@@ -72,3 +72,11 @@ All necessary mesh arrays
 num_vertices
 
 Return as dictionary: `my_dict = {"First Array": [1, 2, 3, 4]}`
+
+## Developing mesh data files and reading thereof:
+
+- [ ] How to write and read an array of Vector3s
+- [ ] How to write and read all 6 sets of mesh arrays to one file (class)
+- [ ] How to draw meshes from set of data
+- [ ] How to select specific resolution for a set via UI (and benchmark)
+
