@@ -69,14 +69,23 @@ face_32_up
 
 Each file returns:
 All necessary mesh arrays
-num_vertices
+num_vertices (not really needed, as can calculate from reolution & margin, if desired)
 
-Return as dictionary: `my_dict = {"First Array": [1, 2, 3, 4]}`
+Return as dictionary: 
+```
+mesh_data = {
+"x+1": {"vertex_array": <vertex_array>, "normal_array": <normal_array>, "uv_array": <uv_array>, "index_array: <index_array>},
+"x-1": {...},
+...
+}
+```
 
 ## Developing mesh data files and reading thereof:
 
-- [ ] How to write and read an array of Vector3s
-- [ ] How to write and read all 6 sets of mesh arrays to one file (class)
+- [x] How to write and read an array of Vector3s
+- [x] How to write and read all 6 sets of mesh arrays to one file (class)
 - [ ] How to draw meshes from set of data
-- [ ] How to select specific resolution for a set via UI (and benchmark)
+- [x] How to select specific resolution for a set via UI (and benchmark)
 
+Turns out that the way I have implemented calculating & writing the data is really slow (number of hours for 6 faces with resolution 128x128). Probably becuase I am creating a huge string and then writing to a file with a newline for each data point.
+In the end, reading the data from file isn't going to save much time anyway, as I'll probably use the same mesh resolution and texture resolution for all renders, and would probably only need to calculate at app startup, after deciding the likeley best settings for the performance of the device in question. Until that is automated, I can just manually select the resolutions, let the meshes data and texture-vertices-data claculate and then make use of them (apply noise and other effects).
