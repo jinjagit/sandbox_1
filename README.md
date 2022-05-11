@@ -89,3 +89,13 @@ mesh_data = {
 
 Turns out that the way I have implemented calculating & writing the data is really slow (number of hours for 6 faces with resolution 128x128). Probably becuase I am creating a huge string and then writing to a file with a newline for each data point.
 In the end, reading the data from file isn't going to save much time anyway, as I'll probably use the same mesh resolution and texture resolution for all renders, and would probably only need to calculate at app startup, after deciding the likeley best settings for the performance of the device in question. Until that is automated, I can just manually select the resolutions, let the meshes data and texture-vertices-data claculate and then make use of them (apply noise and other effects).
+
+## Conclusions
+
+Use this repo as the basis for the next steps:
+- Calculate basic mesh info only when change mesh resolution.
+- Apply noise to vertices of mesh & reclculate triangle normals
+- Calculate sphercial vertex data for each of 6 textures (at various resolutions)
+- Apply noise to textures (colors only at first)
+- Match orientations of textures to mesh faces (using the noise as a guide)
+- Explore using Rust (and multi-threading / parallelism) for performance gains
